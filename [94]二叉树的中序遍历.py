@@ -66,18 +66,36 @@ class Solution:
     def inorderTraversal(self, root: TreeNode) -> List[int]:
         # 我困惑程序如何识别输入的节点性质是左还是右。Q1:比如【1,2,3，null，4,5】4如果视作3的右节子，那5到底是4的左节子？还是往上的3的右节子？
         # Q2:如果不输入null，是否一直视为无限的左节子延伸。【1,2,3,4】就是一个只有左子树的树。在类的构造函数中，没有指定left的使用，如何就自动拥有# 了left节点呢?
+        # 还好，我得到了组长潘招光的帮助，明白了测试用例的输入原理
+
+        # # 第一种方法，中序，模板：先用指针找到每颗子树的最左下角，然后进行进出栈操作
+        # res = []
+        # stack = []
+        # cur = root
+        # while stack or cur:
+        #     while cur:
+        #         stack.append(cur)
+        #         cur = cur.left
+        #     cur = stack.pop()
+        #     res.append(cur.val)
+        #     cur = cur.right
+        # return res
+
+        # 第二种方法，类中定义递归方法
+        def inorder(root:TreeNode) -> List[int]:
+            """
+
+            :rtype: object
+            """
+            if root is None:
+                return
+            inorder(root.left)
+            res.append(root.val)
+            inorder(root.right)
         res = []
-        stack = []
-        cur = root
-        # 中序，模板：先用指针找到每颗子树的最左下角，然后进行进出栈操作
-        while stack or cur:
-            while cur:
-                stack.append(cur)
-                cur = cur.left
-            cur = stack.pop()
-            res.append(cur.val)
-            cur = cur.right
+        inorder(root)
         return res
+
 
 
 
