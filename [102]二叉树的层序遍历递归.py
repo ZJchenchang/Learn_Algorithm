@@ -53,10 +53,23 @@ class Solution:
         #             deque.append(r.right)
         #     res.append(cur)
         # return res
+
         if not root:
             return []
         res = []
         def dfs(index, r:TreeNode):
+            if len(res) < index + 1:
+                res.append([])
+            res[index].append(r.val)
+            if r.left:
+                dfs(index + 1, r.left)
+            if r.right:
+                dfs(index + 1, r.right)
+        dfs(0, root)
+        return res
+
+
+
 
 
 
